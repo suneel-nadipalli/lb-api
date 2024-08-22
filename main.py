@@ -1,6 +1,11 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
 
+import sys
+
+sys.path.append('..')
+
+from utils.utils import *
 
 class Item(BaseModel):
     name: str
@@ -12,7 +17,7 @@ app = FastAPI()
 
 @app.get("/")
 async def read_item():
-    return {"message": "Welcome to our app again!"}
+    return {"message": f"Welcome to our app again! {get_env()}"}
 
 
 @app.get("/hello/{name}")
