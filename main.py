@@ -2,8 +2,6 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
 
-import azure.functions as func
-
 import logging, json, sys, os
 
 sys.path.append("..")
