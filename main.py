@@ -12,7 +12,7 @@ app = FastAPI()
 
 @app.get("/")
 async def read_item():
-    return {"message": "Welcome to our app"}
+    return {"message": "Welcome to our app again!"}
 
 
 @app.get("/hello/{name}")
