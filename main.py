@@ -31,7 +31,7 @@ history = []
 
 @app.get("/")
 async def read_item():
-    return {"message": f"Welcome to our app"}
+    return {"message": f"Welcome to our app updated!"}
 
 @app.post("/query")
 async def query(userMessage: UserMessage):
