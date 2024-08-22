@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
+from fastapi.middleware.cors import CORSMiddleware
 
 import azure.functions as func
 
@@ -26,8 +27,8 @@ class UserMessage(BaseModel):
 app = FastAPI()
 
 origins = [
-    "https://lightbend.get-starlight.com/",
-    "http://lightbend.get-starlight.com/"    
+    "https://lightbend.get-starlight.com",
+    "http://lightbend.get-starlight.com"    
 ]
 
 app.add_middleware(
