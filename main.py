@@ -25,6 +25,19 @@ class UserMessage(BaseModel):
 
 app = FastAPI()
 
+origins = [
+    "https://lightbend.get-starlight.com/",
+    "http://lightbend.get-starlight.com/"    
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 vs = prep_vs()
 
 history = []
