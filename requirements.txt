@@ -2,6 +2,7 @@ fastapi==0.92.0
 pydantic==1.10.4
 uvicorn==0.20.0
 gunicorn==23.0.0
+pandas
 load-dotenv
 azure-storage-blob
 pytz
