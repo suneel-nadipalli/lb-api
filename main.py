@@ -12,7 +12,7 @@ from utils.utils import *
 
 from utils.azure_utils import *
 
-from utils.blob_utils import update_logs_txt, update_logs_csv
+# from utils.blob_utils import update_logs_txt, update_logs_csv
 
 app = FastAPI()
 
@@ -57,9 +57,9 @@ async def query(userMessage: UserMessage):
         "sources": srcs
     }
 
-    update_logs_txt(userMessage.uuid, "clear", "", "")
+    # update_logs_txt(userMessage.uuid, "clear", "", "")
 
-    update_logs_csv(userMessage.uuid, "clear", "", "")
+    # update_logs_csv(userMessage.uuid, "clear", "", "")
 
 
     return response
