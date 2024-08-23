@@ -14,19 +14,11 @@ from utils.azure_utils import *
 
 from utils.blob_utils import update_logs_txt, update_logs_csv
 
-class Item(BaseModel):
-    name: str
-    price: float
-
-class UserMessage(BaseModel):
-    message: str
-    uuid: str
-
 app = FastAPI()
 
 origins = [
-    "https://lightbend.get-starlight.com",
-    "http://lightbend.get-starlight.com"    
+
+    "https://lightbend.get-starlight.com/"
 ]
 
 app.add_middleware(
@@ -36,6 +28,13 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+class Item(BaseModel):
+    name: str
+    price: float
+
+class UserMessage(BaseModel):
+    message: str
+    uuid: str
 
 vs = prep_vs()
 
@@ -47,6 +46,7 @@ async def read_item():
 
 @app.post("/query")
 async def query(userMessage: UserMessage):
+    print(userMessage)
     global history
 
     answer, srcs, history = gen_resp(search_query = userMessage.message, vector_store = vs,
