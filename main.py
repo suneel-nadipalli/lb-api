@@ -59,8 +59,7 @@ async def query(userMessage: UserMessage):
 
     update_logs_txt(userMessage.uuid, "query", userMessage.message, answer)
 
-    # update_logs_csv(userMessage.uuid, "clear", "", "")
-
+    update_logs_csv(userMessage.uuid, "query", userMessage.message, answer)
 
     return response
 
