@@ -12,7 +12,7 @@ from utils.utils import *
 
 from utils.azure_utils import *
 
-# from utils.blob_utils import update_logs_txt, update_logs_csv
+from utils.blob_utils import update_logs_txt, update_logs_csv
 
 app = FastAPI()
 
@@ -57,7 +57,7 @@ async def query(userMessage: UserMessage):
         "sources": srcs
     }
 
-    # update_logs_txt(userMessage.uuid, "clear", "", "")
+    update_logs_txt(userMessage.uuid, "query", userMessage.message, answer)
 
     # update_logs_csv(userMessage.uuid, "clear", "", "")
 
@@ -69,5 +69,7 @@ async def clear():
     global history
 
     history = []
+
+    # update_logs_txt(, "clear", userMessage.message, answer)
 
     return {"message": "History cleared"}
