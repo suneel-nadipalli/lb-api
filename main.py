@@ -42,7 +42,7 @@ history = []
 
 @app.get("/")
 async def read_item():
-    return {"message": f"Welcome to our app updated!"}
+    return {"message": f"Welcome to our app updated with CORS!"}
 
 @app.post("/query")
 async def query(userMessage: UserMessage):
