@@ -11,3 +11,4 @@ langchain
 PyPDF2
 faiss-cpu
 numpy
+langchain-community
