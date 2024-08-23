@@ -5,7 +5,7 @@ gunicorn==23.0.0
 load-dotenv
 azure-storage-blob
 pytz
-panda
+pandas
 langchain-openai
 langchain
 PyPDF2
