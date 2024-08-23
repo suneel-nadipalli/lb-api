@@ -28,6 +28,7 @@ def cosine_similarity(vector, matrix):
     similarities = dot_product / (matrix_norms * vector_norm)
     return round(similarities, 2)
 
+
 # Step 3: Query the retriever and generate an answer
 
 def query_rag_system(vector_store, query, history, k):
@@ -72,7 +73,12 @@ def query_rag_system(vector_store, query, history, k):
         counts[item["source"]] += 1
 
     # Calculate the average and convert the results back to a list of dictionaries
-    doc_metadata = [{"source": source, "score": total_scores[source] / counts[source]} for source in total_scores]
+    doc_metadata = [
+        {
+        "source": source, 
+        "score": total_scores[source] / counts[source],
+        "url": get_public_url(source)
+        } for source in total_scores]
 
     return answer.content, doc_metadata, history
   
