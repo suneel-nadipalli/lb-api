@@ -42,7 +42,7 @@ history = []
 
 @app.get("/")
 async def read_item():
-    return {"message": f"Update: Added Pandas back in req file"}
+    return {"message": f"Update: We back from break!"}
 
 @app.post("/query")
 async def query(userMessage: UserMessage):
