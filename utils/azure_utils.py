@@ -12,9 +12,9 @@ from datetime import datetime, timedelta
 from PyPDF2 import PdfReader
 
 from langchain.docstore.document import Document
-from langchain.vectorstores import FAISS
+from langchain_community.vectorstores import FAISS
 from langchain.text_splitter import CharacterTextSplitter
-from langchain.embeddings import OpenAIEmbeddings
+from langchain_openai import OpenAIEmbeddings
 
 AZURE_ACC_NAME = os.getenv("AZURE_ACC_NAME")
 AZURE_ACC_KEY = os.getenv("AZURE_ACC_KEY")

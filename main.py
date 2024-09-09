@@ -19,6 +19,7 @@ app = FastAPI()
 origins = [
 
     "https://lightbend.get-starlight.com/"
+    # "http://localhost:3000"
 ]
 
 app.add_middleware(
@@ -40,11 +41,11 @@ vs = prep_vs()
 
 history = []
 
-@app.get("/")
+@app.get("/api")
 async def read_item():
-    return {"message": f"Update: We back from break!"}
+    return {"message": f"Update: Added first version of system prompt to be more direct and respond at a 8th grade reading level!"}
 
-@app.post("/query")
+@app.post("/api/query")
 async def query(userMessage: UserMessage):
     print(userMessage)
     global history
@@ -63,7 +64,7 @@ async def query(userMessage: UserMessage):
 
     return response
 
-@app.post("/clear")
+@app.post("/api/clear")
 async def clear():
     global history
 

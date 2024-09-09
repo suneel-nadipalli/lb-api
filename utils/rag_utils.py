@@ -10,8 +10,8 @@ import numpy as np
 
 from collections import defaultdict
 
-from langchain.chat_models import ChatOpenAI
-from langchain.embeddings import OpenAIEmbeddings
+from langchain_community.chat_models import ChatOpenAI
+from langchain_openai import OpenAIEmbeddings
 from langchain.schema import HumanMessage, AIMessage
 
 from utils.azure_utils import *
@@ -19,6 +19,12 @@ from utils.azure_utils import *
 os.environ["OPENAI_API_KEY"] = os.getenv("OPENAI_API_KEY")
 
 embeddings = OpenAIEmbeddings()
+
+SYSTEM_PROMPT = """You are a helpful AI assistant designed to help users answer questions about
+Southbend applications. Your goal is to provide helpful and accurate information to the user
+to help them clarify their doubts and fill in their application. Be direct and concise in
+your responses. Do not provide any information that is not relevant to the user's query,
+or more than what's required. Assume the user's reading level is 8th grade."""
 
 import numpy as np
 def cosine_similarity(vector, matrix):
@@ -42,6 +48,12 @@ def query_rag_system(vector_store, query, history, k):
     combined_content = "\n".join([doc.page_content for doc in retrieved_docs])
     
     # Create a prompt with the combined content and the query
+
+    content = f"""
+    System: {SYSTEM_PROMPT}
+    Context: {combined_content}
+    Query: {query}
+    """
 
     history = [
         HumanMessage(content=combined_content + "\n\nQuery: " + query)
