@@ -3,6 +3,7 @@ pydantic
 uvicorn
 gunicorn
 numpy
+pandas
 torch
 torchvision
 torchaudio
