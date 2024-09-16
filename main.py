@@ -18,8 +18,8 @@ app = FastAPI()
 
 origins = [
 
-    # "https://lightbend.get-starlight.com/"
-    "http://localhost:3000"
+    "https://lightbend.get-starlight.com/"
+    # "http://localhost:3000"
 ]
 
 app.add_middleware(
