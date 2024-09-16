@@ -61,7 +61,7 @@ async def query(userMessage: UserMessage):
 
     update_logs_txt(userMessage.uuid, "query", userMessage.message, responses[0]["answer"])
 
-    update_logs_csv(userMessage.uuid, "query", userMessage.message, responses[0]["answer"])
+    # update_logs_csv(userMessage.uuid, "query", userMessage.message, responses[0]["answer"])
 
     return responses
 
