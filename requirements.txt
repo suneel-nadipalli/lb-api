@@ -4,10 +4,6 @@ uvicorn
 gunicorn
 numpy
 pandas
-torch
-torchvision
-torchaudio
-transformers
 load-dotenv
 azure-storage-blob
 pytz
