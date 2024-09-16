@@ -50,21 +50,25 @@ def create_vector_store(documents):
     vector_store = FAISS.from_documents(split_documents, embeddings)
     return vector_store
 
-def prep_docs():
+def prep_docs(container_name):
     connection_string = os.getenv('AZURE_BS_URL')
     blob_service_client = BlobServiceClient.from_connection_string(connection_string)
-
-    # Specify the container name where your PDFs are stored
-    container_name = "rag-data-v1"
 
     documents = load_documents_from_azure(blob_service_client, container_name)
 
     return documents
 
-def prep_vs():
-    documents = prep_docs()
-    vector_store = create_vector_store(documents)
-    return vector_store
+def prep_vs(containers):
+
+    vs_dict = {}
+
+    for container in containers:
+        documents = prep_docs(container)
+        vector_store = create_vector_store(documents)
+
+        vs_dict[container] = vector_store
+    
+    return vs_dict
 
 def get_public_url(file_name):
     

@@ -1,8 +1,12 @@
-fastapi==0.92.0
-pydantic==1.10.4
-uvicorn==0.20.0
-gunicorn==23.0.0
-pandas
+fastapi
+pydantic
+uvicorn
+gunicorn
+numpy
+torch
+torchvision
+torchaudio
+transformers
 load-dotenv
 azure-storage-blob
 pytz
@@ -10,5 +14,4 @@ langchain-openai
 langchain
 PyPDF2
 faiss-cpu
-numpy
 langchain-community

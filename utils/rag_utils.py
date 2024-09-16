@@ -42,7 +42,7 @@ def query_rag_system(vector_store, query, history, k):
     
     retrieved_docs = retriever.get_relevant_documents(query, return_metadata=True)
    
-    llm = ChatOpenAI(model="gpt-4", temperature=0)
+    llm = ChatOpenAI(model="gpt-4-1106-preview", temperature=0)
     
     # Combine the content of the relevant documents for generation
     combined_content = "\n".join([doc.page_content for doc in retrieved_docs])
@@ -56,7 +56,7 @@ def query_rag_system(vector_store, query, history, k):
     """
 
     history = [
-        HumanMessage(content=combined_content + "\n\nQuery: " + query)
+        HumanMessage(content=content)
     ]
         
     answer = llm(history)
@@ -94,10 +94,19 @@ def query_rag_system(vector_store, query, history, k):
 
     return answer.content, doc_metadata, history
   
-def gen_resp(search_query, vector_store, history, k=3):
-    if vector_store is None:
-        vector_store = prep_vs()
+def gen_resp(search_query, vs_dict, history, k=3):
 
-    answer, doc_metadata, history = query_rag_system(vector_store, search_query, history, k)
+    responses = []
+
+    for key, vs in vs_dict.items():
+        answer, doc_metadata, history = query_rag_system(vs, search_query, history, k)
+
+        response = {
+            "answer": answer,
+            "sources": doc_metadata,
+            "vs": key
+        }
+
+        responses.append(response)
     
-    return answer, doc_metadata, history
+    return responses, history

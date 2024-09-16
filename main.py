@@ -18,8 +18,8 @@ app = FastAPI()
 
 origins = [
 
-    "https://lightbend.get-starlight.com/"
-    # "http://localhost:3000"
+    # "https://lightbend.get-starlight.com/"
+    "http://localhost:3000"
 ]
 
 app.add_middleware(
@@ -37,32 +37,33 @@ class UserMessage(BaseModel):
     message: str
     uuid: str
 
-vs = prep_vs()
+containers = ["training", "raw", "training-raw"]
+
+containers = ["training"]
+
+vs_dict = prep_vs(containers)
 
 history = []
 
 @app.get("/api")
 async def read_item():
-    return {"message": f"Update: Added first version of system prompt to be more direct and respond at a 8th grade reading level!"}
+    return {"message": f"Update: Changed GPT model to gpt-4-1106-preview"}
 
 @app.post("/api/query")
 async def query(userMessage: UserMessage):
+    
     print(userMessage)
+    
     global history
-
-    answer, srcs, history = gen_resp(search_query = userMessage.message, vector_store = vs,
+    
+    responses, history = gen_resp(search_query = userMessage.message, vs_dict = vs_dict,
                                         history = history, k = 3)
-            
-    response = {
-        "answer": answer,
-        "sources": srcs
-    }
 
-    update_logs_txt(userMessage.uuid, "query", userMessage.message, answer)
+    update_logs_txt(userMessage.uuid, "query", userMessage.message, responses[0]["answer"])
 
-    # update_logs_csv(userMessage.uuid, "query", userMessage.message, answer)
+    update_logs_csv(userMessage.uuid, "query", userMessage.message, responses[0]["answer"])
 
-    return response
+    return responses
 
 @app.post("/api/clear")
 async def clear():
