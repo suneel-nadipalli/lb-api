@@ -3,7 +3,6 @@ pydantic
 uvicorn
 gunicorn
 numpy
-pandas
 load-dotenv
 azure-storage-blob
 pytz

@@ -18,8 +18,8 @@ app = FastAPI()
 
 origins = [
 
-    "https://lightbend.get-starlight.com/"
-    # "http://localhost:3000"
+    "https://lightbend.get-starlight.com/",
+    "http://localhost:3000"
 ]
 
 app.add_middleware(
@@ -47,7 +47,7 @@ history = []
 
 @app.get("/api")
 async def read_item():
-    return {"message": f"Update: Changed GPT model to gpt-4-1106-preview"}
+    return {"message": f"Update: Switched out OpenAI for Azure OpenAI Client"}
 
 @app.post("/api/query")
 async def query(userMessage: UserMessage):
