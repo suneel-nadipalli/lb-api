@@ -12,7 +12,7 @@ from utils.utils import *
 
 from utils.azure_utils import *
 
-from utils.blob_utils import update_logs_txt, update_logs_csv
+# from utils.blob_utils import update_logs_txt, update_logs_csv
 
 app = FastAPI()
 
@@ -59,7 +59,7 @@ async def query(userMessage: UserMessage):
     responses, history = gen_resp(search_query = userMessage.message, vs_dict = vs_dict,
                                         history = history, k = 3)
 
-    update_logs_txt(userMessage.uuid, "query", userMessage.message, responses[0]["answer"])
+    # update_logs_txt(userMessage.uuid, "query", userMessage.message, responses[0]["answer"])
 
     # update_logs_csv(userMessage.uuid, "query", userMessage.message, responses[0]["answer"])
 
