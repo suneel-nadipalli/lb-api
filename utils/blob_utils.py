@@ -1,4 +1,4 @@
-import pandas as pd
+# import pandas as pd
 from io import BytesIO
 
 import os, sys
@@ -45,36 +45,36 @@ def update_logs_txt(uuid, function_call, message, answer):
 
     blob_client.upload_blob(content, overwrite=True)
 
-def update_logs_csv(uuid, function_call, message, answer):
+# def update_logs_csv(uuid, function_call, message, answer):
      
-    blob_client = prep_client(blob="rag-logs.csv")
+#     blob_client = prep_client(blob="rag-logs.csv")
     
-    stream = blob_client.download_blob()  
-    with BytesIO() as buf:
-        stream.readinto(buf)
+#     stream = blob_client.download_blob()  
+#     with BytesIO() as buf:
+#         stream.readinto(buf)
 
-        # needed to reset the buffer, otherwise, panda won't read from the start
-        buf.seek(0)
+#         # needed to reset the buffer, otherwise, panda won't read from the start
+#         buf.seek(0)
 
-        data = pd.read_csv(buf)
+#         data = pd.read_csv(buf)
 
-    logs_dict = data.to_dict(orient='records')
+#     logs_dict = data.to_dict(orient='records')
 
-    logs_dict.append(
-        {
-            "time": get_time_csv(),
-            "uuid": uuid,
-            "function": function_call,
-            "message": message,
-            "answer": answer,
-            "time-str": get_time_txt()
-        }
-    )
+#     logs_dict.append(
+#         {
+#             "time": get_time_csv(),
+#             "uuid": uuid,
+#             "function": function_call,
+#             "message": message,
+#             "answer": answer,
+#             "time-str": get_time_txt()
+#         }
+#     )
 
-    df = pd.DataFrame(logs_dict)
+#     df = pd.DataFrame(logs_dict)
 
-    df['time'] = pd.to_datetime(df['time'])
+#     df['time'] = pd.to_datetime(df['time'])
 
-    output = df.to_csv(index=False, encoding="utf-8")
+#     output = df.to_csv(index=False, encoding="utf-8")
 
-    blob_client.upload_blob(output, blob_type="BlockBlob", overwrite=True)
+#     blob_client.upload_blob(output, blob_type="BlockBlob", overwrite=True)
