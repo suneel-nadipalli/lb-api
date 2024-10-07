@@ -8,11 +8,7 @@ sys.path.append("..")
 
 from utils.rag_utils import *
 
-from utils.utils import *
-
 from utils.azure_utils import *
-
-# from utils.blob_utils import update_logs_txt, update_logs_csv
 
 app = FastAPI()
 

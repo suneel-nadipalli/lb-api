@@ -11,7 +11,7 @@ load_dotenv()
 
 from azure.storage.blob import BlobServiceClient
 
-from utils.utils import get_time_csv, get_time_txt
+# from utils.utils import get_time_csv, get_time_txt
 
 def prep_client(blob):
     conn_string = os.getenv('AZURE_BS_URL')
@@ -22,28 +22,28 @@ def prep_client(blob):
 
     return blob_client
 
-def update_logs_txt(uuid, function_call, message, answer):
+# def update_logs_txt(uuid, function_call, message, answer):
 
-    if function_call == "clear":
+#     if function_call == "clear":
         
-        log_entry = f"""[LOG ENTRY {get_time_txt()}]: User {uuid} cleared memory"""
+#         log_entry = f"""[LOG ENTRY {get_time_txt()}]: User {uuid} cleared memory"""
     
-    else:   
-        log_entry = f"""[LOG ENTRY {get_time_txt()}]: User {uuid} asked a question:\nMessage: {message}\nAnswer: {answer}""" 
+#     else:   
+#         log_entry = f"""[LOG ENTRY {get_time_txt()}]: User {uuid} asked a question:\nMessage: {message}\nAnswer: {answer}""" 
       
-    blob_client = prep_client(blob="rag-logs.txt")
+#     blob_client = prep_client(blob="rag-logs.txt")
     
-    content = blob_client.download_blob().readall().decode('utf-8').strip()
+#     content = blob_client.download_blob().readall().decode('utf-8').strip()
 
-    content = f"""
-            {content}
+#     content = f"""
+#             {content}
 
-            {log_entry}
+#             {log_entry}
 
-            {'--'*100}\n
-            """
+#             {'--'*100}\n
+#             """
 
-    blob_client.upload_blob(content, overwrite=True)
+#     blob_client.upload_blob(content, overwrite=True)
 
 # def update_logs_csv(uuid, function_call, message, answer):
      
