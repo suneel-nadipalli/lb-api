@@ -43,7 +43,7 @@ history = []
 
 @app.get("/api")
 async def read_item():
-    return {"message": f"Update: Switched out OpenAI for Azure OpenAI Client"}
+    return {"message": f"Update: Added Azure Client Embeddings, added summarization to limit input tokens, and added general conversation"}
 
 @app.post("/api/query")
 async def query(userMessage: UserMessage):
