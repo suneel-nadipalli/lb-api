@@ -42,6 +42,17 @@ def query_rag_system(vector_store, query, history, k):
     retrieved_docs = retriever.get_relevant_documents(query, return_metadata=True)
 
     print("Retrieved Docs...")
+
+    sources = [doc.metadata['source'] for doc in retrieved_docs]
+
+    scores = [
+        cosine_similarity(embed_query(query),
+                          embed_query(doc.page_content)
+                          ) for doc in retrieved_docs
+    ]
+
+    if max(scores) <= 0.75:
+        return "I'm sorry, I don't have an answer to that question. Please try rephrasing your question.", [], history
     
     # Combine the content of the relevant documents for generation
 
@@ -68,14 +79,6 @@ def query_rag_system(vector_store, query, history, k):
 
     print("Answered...")
 
-    sources = [doc.metadata['source'] for doc in retrieved_docs]
-
-    scores = [
-        cosine_similarity(embed_query(query),
-                          embed_query(doc.page_content)
-                          ) for doc in retrieved_docs
-    ]
-
     data = [
     {"source": source, "score": score} 
     for source, score in 
@@ -99,7 +102,7 @@ def query_rag_system(vector_store, query, history, k):
 
     doc_metadata = sorted(doc_metadata, key=lambda x: x["score"], reverse=True)
 
-    return answer, doc_metadata, history
+    return answer, [], history
   
 def gen_resp(search_query, vs_dict, history, k=3):
 
