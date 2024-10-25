@@ -43,7 +43,7 @@ history = []
 
 @app.get("/api")
 async def read_item():
-    return {"message": f"Update: Added Azure Client Embeddings, added summarization to limit input tokens, and added general conversation"}
+    return {"message": f"Update: Added Guardrail score thresholding and few-shot prompting"}
 
 @app.post("/api/query")
 async def query(userMessage: UserMessage):

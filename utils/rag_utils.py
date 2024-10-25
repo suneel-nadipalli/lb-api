@@ -10,18 +10,14 @@ from utils.azure_utils import *
 
 from utils.utils import *
 
+from utils.few_shot import *
+
 client = AzureOpenAI(
   api_key = os.getenv("AZURE_OPENAI_KEY"),  
   api_version = "2023-03-15-preview",
   azure_endpoint = os.getenv("AZURE_OPENAI_ENDPOINT")
 )
 
-SYSTEM_PROMPT = """You are a helpful AI assistant designed to help users answer questions about
-Southbend applications. Your goal is to provide helpful and accurate information to the user
-to help them clarify their doubts and fill in their application. Be direct and concise in
-your responses. Do not provide any information that is not relevant to the user's query,
-or more than what's required. Assume the user's reading level is 8th grade. Answer in no more than 3-4 senteces
-unless really necessary/appropriate to the query."""
 
 def query_rag_system(vector_store, query, history, k):
 
@@ -69,10 +65,10 @@ def query_rag_system(vector_store, query, history, k):
 
     response = client.chat.completions.create(
         model="gpt-4",
-        messages=[
-            {"role": "system", "content": SYSTEM_PROMPT},
-            {"role": "user", "content": content}
-        ]
+        messages=
+        [system_message] +
+        FEW_SHOT_PROMPTS +
+        [{"role": "user", "content": content}]
     )
 
     answer = response.choices[0].message.content
