@@ -35,7 +35,7 @@ class UserMessage(BaseModel):
 
 containers = ["training", "raw", "training-raw"]
 
-containers = ["training"]
+containers = ["train-2025-only"]
 
 vs_dict = prep_vs(containers)
 
@@ -43,7 +43,7 @@ history = []
 
 @app.get("/api")
 async def read_item():
-    return {"message": f"Update: Added Guardrail score thresholding and few-shot prompting"}
+    return {"message": f"Update: Testing with only new 2025 train data"}
 
 @app.post("/api/query")
 async def query(userMessage: UserMessage):
