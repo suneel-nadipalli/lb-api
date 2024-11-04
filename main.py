@@ -10,6 +10,8 @@ from utils.rag_utils import *
 
 from utils.azure_utils import *
 
+from utils.blob_utils import *
+
 app = FastAPI()
 
 origins = [
@@ -43,7 +45,7 @@ history = []
 
 @app.get("/api")
 async def read_item():
-    return {"message": f"Update: Modifiied workflow to get FEW_SHOT_PROMPTS and SYSTEM_PROMPT from Azure Blob Storage"}
+    return {"message": f"Update: Fixed error and added message logging back in"}
 
 @app.post("/api/query")
 async def query(userMessage: UserMessage):
@@ -55,18 +57,18 @@ async def query(userMessage: UserMessage):
     responses, history = gen_resp(search_query = userMessage.message, vs_dict = vs_dict,
                                         history = history, k = 3)
 
-    # update_logs_txt(userMessage.uuid, "query", userMessage.message, responses[0]["answer"])
+    update_logs_txt(userMessage.uuid, "query", userMessage.message, responses[0]["answer"])
 
-    # update_logs_csv(userMessage.uuid, "query", userMessage.message, responses[0]["answer"])
+    update_logs_csv(userMessage.uuid, "query", userMessage.message, responses[0]["answer"])
 
     return responses
 
 @app.post("/api/clear")
-async def clear():
+async def clear(userMessage: UserMessage):
     global history
 
     history = []
 
-    # update_logs_txt(, "clear", userMessage.message, answer)
+    update_logs_txt(userMessage.uuid, "clear", userMessage.message, "answer")
 
     return {"message": "History cleared"}

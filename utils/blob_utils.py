@@ -3,6 +3,8 @@ from io import BytesIO
 
 import os, sys
 
+import pandas as pd
+
 sys.path.append("..")
 
 from dotenv import load_dotenv
@@ -11,7 +13,7 @@ load_dotenv()
 
 from azure.storage.blob import BlobServiceClient
 
-# from utils.utils import get_time_csv, get_time_txt
+from utils.utils import get_time_csv, get_time_txt
 
 def prep_client(container, blob):
     conn_string = os.getenv('AZURE_BS_URL')
