@@ -63,6 +63,13 @@ def query_rag_system(vector_store, query, history, k):
     Query: {query}
     """
 
+    SYSTEM_PROMPT, FEW_SHOT_PROMPTS = get_prompts()
+
+    system_message = {
+        "role": "system",
+        "content": SYSTEM_PROMPT
+    }
+
     response = client.chat.completions.create(
         model="gpt-4",
         messages=

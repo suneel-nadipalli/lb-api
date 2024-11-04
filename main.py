@@ -43,7 +43,7 @@ history = []
 
 @app.get("/api")
 async def read_item():
-    return {"message": f"Update: Testing with only new 2025 train data"}
+    return {"message": f"Update: Modifiied workflow to get FEW_SHOT_PROMPTS and SYSTEM_PROMPT from Azure Blob Storage"}
 
 @app.post("/api/query")
 async def query(userMessage: UserMessage):
