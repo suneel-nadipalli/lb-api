@@ -2,6 +2,7 @@ fastapi
 pydantic
 uvicorn
 gunicorn
+pandas
 numpy
 load-dotenv
 azure-storage-blob
