@@ -6,7 +6,7 @@ import pandas as pd
 
 sys.path.append("..")
 
-from blob_utils import prep_client
+from utils.blob_utils import prep_client
 
 SYSTEM_PROMPT_BASE = """You are a helpful AI assistant designed to help users answer questions about
 Southbend applications. Your goal is to provide helpful and accurate information to the user
