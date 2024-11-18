@@ -35,9 +35,9 @@ class UserMessage(BaseModel):
     message: str
     uuid: str
 
-containers = ["training", "raw", "training-raw"]
+# containers = ["training", "raw", "training-raw"]
 
-containers = ["train-2025-only"]
+containers = ["train-2025-only", "training"]
 
 vs_dict = prep_vs(containers)
 
@@ -45,7 +45,7 @@ history = []
 
 @app.get("/api")
 async def read_item():
-    return {"message": f"Update: Lowered threshold score to .70 instead of .75 and set max_words to 600"}
+    return {"message": f"Update: Lowered threshold score to .68 , switched out GPT model with one that has 120k token limit and set max_words to 1000 again"}
 
 @app.post("/api/query")
 async def query(userMessage: UserMessage):
