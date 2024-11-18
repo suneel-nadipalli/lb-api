@@ -47,13 +47,13 @@ def query_rag_system(vector_store, query, history, k):
                           ) for doc in retrieved_docs
     ]
 
-    if max(scores) <= 0.75:
+    if max(scores) <= 0.70:
         return "I'm sorry, I don't have an answer to that question. Please try rephrasing your question.", [], history
     
     # Combine the content of the relevant documents for generation
 
     combined_content = "\n".join(
-        [summarize_content(doc.page_content, max_words=1000) for doc in retrieved_docs]
+        [summarize_content(doc.page_content, max_words=600) for doc in retrieved_docs]
         )
     
     # Create a prompt with the combined content and the query

@@ -45,7 +45,7 @@ history = []
 
 @app.get("/api")
 async def read_item():
-    return {"message": f"Update: Fixed error and added message logging back in"}
+    return {"message": f"Update: Lowered threshold score to .70 instead of .75 and set max_words to 600"}
 
 @app.post("/api/query")
 async def query(userMessage: UserMessage):
