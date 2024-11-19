@@ -45,7 +45,7 @@ history = []
 
 @app.get("/api")
 async def read_item():
-    return {"message": f"Update: Lowered threshold score to .68 , switched out GPT model with one that has 120k token limit and set max_words to 1000 again"}
+    return {"message": f"Update: Lowered threshold score to .68 , switched out GPT model with one that has 120k token limit and set max_words to 1000 again - changed"}
 
 @app.post("/api/query")
 async def query(userMessage: UserMessage):
